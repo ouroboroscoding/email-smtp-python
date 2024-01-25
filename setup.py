@@ -21,8 +21,8 @@ setup(
 	packages=['em'],
 	python_requires='>=3.10',
 	install_requires=[
-		'config-oc>=1.0.0,<1.1',
-		'tools-oc>=1.2.1,<1.3',
+		'config-oc>=1.0.3,<1.1',
+		'tools-oc>=1.2.3,<1.3',
 		'undefined-oc>=1.0.0,<1.1'
 	],
 	zip_safe=True
