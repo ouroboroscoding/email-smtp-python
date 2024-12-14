@@ -10,6 +10,12 @@ __version__		= "1.0.0"
 __email__		= "chris@ouroboroscoding.com"
 __created__		= "2018-11-17"
 
+# Limit exports
+__all__ = [
+	'error', 'last_error', 'send', 'valid',
+	'OK', 'EUNKNOWN', 'ECONNECT', 'ELOGIN'
+]
+
 # Ouroboros imports
 from config import config
 from tools import evaluate
@@ -40,9 +46,13 @@ __regex = re.compile(r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$')
 
 # Create the defines
 OK: int = 0
+"""Sent Successfully"""
 EUNKNOWN: int = -1
+"""Unknown error from SMTP server"""
 ECONNECT: int = -2
+"""Error connecting to SMTP server"""
 ELOGIN: int = -3
+"""Error logging into the SMTP server"""
 
 def _addresses(l):
 	"""Addresses
@@ -179,7 +189,7 @@ def send(to: str | List[str], subject: str, opts: dict) -> int:
 		})
 
 	# Init the list of total "to"s
-	lTO = [to]
+	lTO = [ to ]
 
 	# If from is missing, create a generic one
 	if 'from' not in opts:
