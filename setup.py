@@ -5,7 +5,7 @@ with open('README.md', 'r') as oF:
 
 setup(
 	name='email-smtp',
-	version='1.0.0',
+	version='1.0.1',
 	description='',
 	long_description=long_description,
 	long_description_content_type='text/markdown',
@@ -21,8 +21,8 @@ setup(
 	packages=['em'],
 	python_requires='>=3.10',
 	install_requires=[
-		'config-oc>=1.0.3,<1.1',
-		'tools-oc>=1.2.3,<1.3',
+		'config-oc>=1.1.0,<1.2',
+		'tools-oc>=1.2.4,<1.3',
 		'undefined-oc>=1.0.0,<1.1'
 	],
 	zip_safe=True
