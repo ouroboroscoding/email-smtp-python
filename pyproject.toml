@@ -1,0 +1,29 @@
+[build-system]
+requires = [ "hatchling" ]
+build-backend = "hatchling.build"
+
+[project]
+name = "email_smtp"
+version = "1.0.2"
+description = "Handles sending emails using SMTP with complex attachments"
+authors = [
+    {name = "Chris Nasr - Ouroboros Coding Inc.", email = "chris@ouroboroscoding.com"}
+]
+maintainers = [
+    {name = "Chris Nasr - Ouroboros Coding Inc.", email = "chris@ouroboroscoding.com"}
+]
+license-files = [ "LICENSE" ]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+	'config-oc>=1.1.0,<1.2',
+	'tools-oc>=1.2.5,<1.3',
+	'undefined-oc>=1.0.0,<1.1'
+]
+
+[project.urls]
+Source = "https://github.com/ouroboroscoding/email-smtp-python"
+Tracker = "https://github.com/ouroboroscoding/email-smtp-python/issues"
+
+[tool.hatch.build]
+packages = [ "em" ]
