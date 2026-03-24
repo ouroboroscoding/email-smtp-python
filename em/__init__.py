@@ -32,6 +32,7 @@ import platform
 import re
 import smtplib
 import socket
+import ssl
 from sys import stderr
 from typing import List
 
@@ -292,11 +293,23 @@ def send(to: str | List[str], subject: str, opts: dict) -> int:
 		# Create a new instance of the SMTP class
 		oSMTP = smtplib.SMTP(__smtp['host'], __smtp['port'])
 
+		# Explicit EHLO
+		oSMTP.ehlo()
+
 		# If we need TLS
 		if __smtp['tls']:
 
+			# Create explicit SSL context with modern defaults
+			context = ssl.create_default_context()
+
+			# Enforce minimum TLS version for future compatibility
+			context.minimum_version = ssl.TLSVersion.TLSv1_2
+
 			# Start TLS
-			oSMTP.starttls()
+			oSMTP.starttls(context=context)
+
+			# Re-EHLO after TLS (required by some servers)
+			oSMTP.ehlo()
 
 		# If there's a username
 		if __smtp['user']:
@@ -304,9 +317,9 @@ def send(to: str | List[str], subject: str, opts: dict) -> int:
 			# Log in with the given credentials
 			oSMTP.login(__smtp['user'], __smtp['passwd'])
 
-		# Try to send the message, then close the SMTP
+		# Try to send the message, then quit the SMTP
 		oSMTP.sendmail(opts['from'], _to(lTO), sBody)
-		oSMTP.close()
+		oSMTP.quit()
 
 		# Return ok
 		return OK
