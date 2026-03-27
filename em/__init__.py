@@ -192,9 +192,14 @@ def send(to: str | List[str], subject: str, opts: dict) -> int:
 	# Init the list of total "to"s
 	lTO = [ to ]
 
-	# If from is missing, create a generic one
+	# If from is missing
 	if 'from' not in opts:
-		opts['from'] = 'noreply@%s' % socket.gethostname()
+
+		# Get the default from the config
+		sFrom = config.email['from']('')
+
+		# Use it or generate a one based on the hostname
+		opts['from'] = sFrom or 'noreply@%s' % socket.gethostname()
 
 	# Create a new Mime MultiPart message
 	oMMP = MIMEMultipart('mixed')
