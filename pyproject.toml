@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "email_smtp"
-version = "1.0.2"
+version = "1.0.3"
 description = "Handles sending emails using SMTP with complex attachments"
 authors = [
     {name = "Chris Nasr - Ouroboros Coding Inc.", email = "chris@ouroboroscoding.com"}
